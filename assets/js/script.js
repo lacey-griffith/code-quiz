@@ -97,7 +97,7 @@ function createQuestions() {
 //if correct answer is chosen, go to next questions, 
 //if incorrect answer is chosen, deduct time from timer
 function checkAnswers() {
-    if (quizQuestions[0] === quizQuestions.B) {
+    if (quizQuestions[0] === quizQuestions.A) {
     }
 }
 
