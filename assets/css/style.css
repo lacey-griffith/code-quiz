@@ -1,4 +1,6 @@
-
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 body,
 .quiz-content {
     font-family: Arial, Helvetica, sans-serif;
@@ -13,30 +15,20 @@ body,
     border: solid 1px black;
     margin: 30px 50px;
     text-align: center;
+    box-shadow: 0 0 10px 2px;
 }
 .quiz-questions {
     font-size: 50px;
     margin: 30px 50px;
     text-align: center;
 }
-.quiz-answers ul {
-    padding: 0 40px 0 40px;
-}
-.quiz-answers ul li {
-    list-style: none;
-}
-.quiz-answers ul li button {
-    background-color: teal;
-    width: 100%;
-    text-align: center;
-    font-size: 30px;
-    color: white;
-    text-align: center;
-    margin: 3px 0;
-}
-.start-button {
+
+.btn {
     font-size: 22px;
     background-color:teal;
     color: white;
     margin: 50px 50px 20px 50px;
+}
+.hide {
+    display: none;
 }
