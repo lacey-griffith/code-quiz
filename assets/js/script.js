@@ -14,9 +14,10 @@ var answerContainerHideEl = document.querySelector("#hide");
 //create button to start the quiz
 var startButton = document.createElement("button");
 startButton = document.querySelector("#start-button");
-startButton.className = "btn";
+startButton.className = "start-btn";
 startButton.textContent = "Click to start";
 
+//multiple choice buttons
 
 
 var score = 15;
@@ -88,42 +89,51 @@ function runTimer() {
 //when start button is clicked , create questions
 function startQuiz() {
     startButton.remove();
-    document.getElementById("hide").removeAttribute("class");
+    buttonA = document.querySelector("#buttonA").removeAttribute("hide");
+    buttonB = document.querySelector("#buttonB").removeAttribute("hide");
+    buttonC = document.querySelector("#buttonC").removeAttribute("hide");
+    buttonD = document.querySelector("#buttonD").removeAttribute("hide");
 
-    for (var i= 0; i < questionsArray.length; i++) {
-    var createQuestion = document.querySelector("#quiz-questions");
-    createQuestion.textContent = questionsArray[i].number +". " + questionsArray[i].question
-    answers.push(questionsArray[i].answers);
-    console.log(answers);
-    toString(answers)
-    console.log(answers);
-        for(var i=0; i < answers.length; i++) {
-            var createAnswers = document.querySelector("quiz-answers btn");
-            createAnswers.textContent = "testing" + answers.text;
-            }
-    }
+    for (var i = 0; i < questionsArray.length; i++) {
+        var createQuestion = document.querySelector("#quiz-questions");
+        createQuestion.textContent = questionsArray[i].number + ". " + questionsArray[i].question
+        answers.push(questionsArray[i].answers);
 
-    console.log(answers);
-        // for (var i=0; i < questionsArray[answers].length; i++) {
+        var buttonA = document.querySelector("#buttonA");
+        buttonA.className = "btn";
+        buttonA.textContent = "A) " + answers[0][0].text;
 
+        var buttonB = document.querySelector("#buttonB");
+        buttonB.className = "btn";
+        buttonB.textContent = "B) " + answers[0][1].text;
+
+        var buttonC = document.querySelector("#buttonC");
+        buttonC.className = "btn";
+        buttonC.textContent= "C) " + answers[0][2].text;
+
+        var buttonD = document.querySelector("#buttonD");
+        buttonD.className = "btn";
+        buttonD.textContent = "D) " + answers[0][3].text;
+
+}
 }
 
 
 
-    //if incorrect answer is chosen, deduct time from timer
+//if incorrect answer is chosen, deduct time from timer
 
 
-    //display score
+//display score
 
-    //prompt user for initals
+//prompt user for initals
 
-    //save initals and score to localStorage
+//save initals and score to localStorage
 
-    //on submit, show highscores
+//on submit, show highscores
 
 
-    //eventlistener for start button
-    startButton.addEventListener("click", runTimer);
-    startButton.addEventListener("click", startQuiz);
+//eventlistener for start button
+startButton.addEventListener("click", runTimer);
+startButton.addEventListener("click", startQuiz);
 
-    //event listeners for answer buttons
+//event listeners for answer buttons

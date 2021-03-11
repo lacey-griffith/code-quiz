@@ -22,13 +22,20 @@ body,
     margin: 30px 50px;
     text-align: center;
 }
-
-.btn {
+.start-btn {
     font-size: 22px;
     background-color:teal;
     color: white;
     margin: 50px 50px 20px 50px;
     width: 200px;
+}
+.btn {
+    font-size: 22px;
+    background-color:teal;
+    color: white;
+    margin: 50px 50px 20px 50px;
+    width: 600px;
+    height: max-content;
 }
 .hide {
     display: none;
