@@ -8,8 +8,6 @@
 //when over, score is shown
 //type initials and score is saved
 
-var answerContainerEl = document.querySelector("#quiz-answers");
-var answerContainerHideEl = document.querySelector("#hide");
 
 //create button to start the quiz
 var startButton = document.createElement("button");
@@ -19,7 +17,7 @@ startButton.textContent = "Click to start";
 
 //multiple choice buttons
 
-
+var answers = [];
 var score = 15;
 
 var timeLeft = 10
@@ -70,8 +68,6 @@ var questionsArray = [{
     },
 ];
 
-answers = [];
-
 //timer created, when start button is clicked, countdown begins
 function runTimer() {
     var timer = document.querySelector("#timer")
@@ -87,7 +83,7 @@ function runTimer() {
 }
 
 //when start button is clicked , create questions
-function startQuiz() {
+function createQuestion() {
     startButton.remove();
     buttonA = document.querySelector("#buttonA").removeAttribute("hide");
     buttonB = document.querySelector("#buttonB").removeAttribute("hide");
@@ -95,6 +91,7 @@ function startQuiz() {
     buttonD = document.querySelector("#buttonD").removeAttribute("hide");
 
     for (var i = 0; i < questionsArray.length; i++) {
+        answers = [];
         var createQuestion = document.querySelector("#quiz-questions");
         createQuestion.textContent = questionsArray[i].number + ". " + questionsArray[i].question
         answers.push(questionsArray[i].answers);
@@ -102,23 +99,35 @@ function startQuiz() {
         var buttonA = document.querySelector("#buttonA");
         buttonA.className = "btn";
         buttonA.textContent = "A) " + answers[0][0].text;
+        console.log(answers[0][0].correct);
 
         var buttonB = document.querySelector("#buttonB");
         buttonB.className = "btn";
         buttonB.textContent = "B) " + answers[0][1].text;
+        console.log(answers[0][1].correct);
 
         var buttonC = document.querySelector("#buttonC");
         buttonC.className = "btn";
-        buttonC.textContent= "C) " + answers[0][2].text;
+        buttonC.textContent = "C) " + answers[0][2].text;
+        console.log(answers[0][2].correct);
 
         var buttonD = document.querySelector("#buttonD");
         buttonD.className = "btn";
         buttonD.textContent = "D) " + answers[0][3].text;
+        console.log(answers[0][3].correct);
 
+        if (
+            answers.correct === true) {
+            alert("Right!");
+            i++;
+
+        } else if (
+            answers.correct === false) {
+            alert("Wrong!");
+            i++;
+        }
+    }
 }
-}
-
-
 
 //if incorrect answer is chosen, deduct time from timer
 
@@ -134,6 +143,11 @@ function startQuiz() {
 
 //eventlistener for start button
 startButton.addEventListener("click", runTimer);
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", createQuestion);
+
+buttonA.addEventListener("click", createQuestion);
+buttonB.addEventListener("click", createQuestion);
+buttonC.addEventListener("click", createQuestion);
+buttonD.addEventListener("click", createQuestion);
 
 //event listeners for answer buttons
