@@ -69,6 +69,8 @@ var questionsArray = [{
     },
 ];
 
+answers = [];
+
 //timer created, when start button is clicked, countdown begins
 function runTimer() {
     var timer = document.querySelector("#timer")
@@ -86,17 +88,24 @@ function runTimer() {
 //when start button is clicked , create questions
 function startQuiz() {
     startButton.remove();
-    console.log(questionsArray.answers);
-    for (var i=0; i < questionsArray.length; i++) {
+    document.getElementById("hide").removeAttribute("class");
+
+    for (var i= 0; i < questionsArray.length; i++) {
     var createQuestion = document.querySelector("#quiz-questions");
-    createQuestion.textContent = questionsArray[i].question
-    
-        for (var i=0; i < questionsArray.answers.length; i++) {
-        var createAnswers = document.createElement("button");
-        createAnswers.className("quiz-answers btn");
-        createAnswers.textContent = "testing" + questionsArray.answers[i];
-        }
+    createQuestion.textContent = questionsArray[i].number +". " + questionsArray[i].question
+    answers.push(questionsArray[i].answers);
+    console.log(answers);
+    toString(answers)
+    console.log(answers);
+        for(var i=0; i < answers.length; i++) {
+            var createAnswers = document.querySelector("quiz-answers btn");
+            createAnswers.textContent = "testing" + answers.text;
+            }
     }
+
+    console.log(answers);
+        // for (var i=0; i < questionsArray[answers].length; i++) {
+
 }
 
 
