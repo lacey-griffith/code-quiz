@@ -28,6 +28,7 @@ body,
     background-color:teal;
     color: white;
     margin: 50px 50px 20px 50px;
+    width: 200px;
 }
 .hide {
     display: none;
