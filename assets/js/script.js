@@ -82,6 +82,10 @@ function runTimer() {
     console.log(timeLeft);
 }
 
+function startQuiz () {
+    createQuestion();
+}
+
 //when start button is clicked , create questions
 function createQuestion() {
     startButton.remove();
@@ -95,43 +99,82 @@ function createQuestion() {
         var createQuestion = document.querySelector("#quiz-questions");
         createQuestion.textContent = questionsArray[i].number + ". " + questionsArray[i].question
         answers.push(questionsArray[i].answers);
+    }
 
-        var buttonA = document.querySelector("#buttonA");
-        buttonA.className = "btn";
-        buttonA.textContent = "A) " + answers[0][0].text;
-        console.log(answers[0][0].correct);
+    var buttonA = document.querySelector("#buttonA");
+    buttonA.className = "btn";
+    buttonA.textContent = "A) " + answers[0][0].text;
+    buttonA.value = answers[0][0].correct
 
-        var buttonB = document.querySelector("#buttonB");
-        buttonB.className = "btn";
-        buttonB.textContent = "B) " + answers[0][1].text;
-        console.log(answers[0][1].correct);
+    var buttonB = document.querySelector("#buttonB");
+    buttonB.className = "btn";
+    buttonB.textContent = "B) " + answers[0][1].text;
+    buttonB.value = answers[0][1].correct
 
-        var buttonC = document.querySelector("#buttonC");
-        buttonC.className = "btn";
-        buttonC.textContent = "C) " + answers[0][2].text;
-        console.log(answers[0][2].correct);
+    var buttonC = document.querySelector("#buttonC");
+    buttonC.className = "btn";
+    buttonC.textContent = "C) " + answers[0][2].text;
+    buttonC.value = answers[0][2].correct;
 
-        var buttonD = document.querySelector("#buttonD");
-        buttonD.className = "btn";
-        buttonD.textContent = "D) " + answers[0][3].text;
-        console.log(answers[0][3].correct);
+    var buttonD = document.querySelector("#buttonD");
+    buttonD.className = "btn";
+    buttonD.textContent = "D) " + answers[0][3].text;
+    buttonD.value = answers[0][3].correct;
+};
 
-        if (
-            answers.correct === true) {
-            alert("Right!");
-            i++;
 
-        } else if (
-            answers.correct === false) {
-            alert("Wrong!");
-            i++;
-        }
+
+function checkAnswerA(event) {
+    if (
+        buttonA.value === "true") {
+        alert("Right!");
+        score = score + 5;
+
+    } else if (
+        buttonA.value === "false") {
+        alert("Wrong!");
+        timeLeft = timeLeft - 2;
     }
 }
 
-//if incorrect answer is chosen, deduct time from timer
+function checkAnswerB(event) {
+    if (
+        buttonB.value === "true") {
+        alert("Right!");
+        score = score + 5;
 
+    } else if (
+        buttonB.value === "false") {
+        alert("Wrong!");
+        timeLeft = timeLeft - 2;
+    }
+}
 
+function checkAnswerC(event) {
+    if (
+        buttonC.value === "true") {
+        alert("Right!");
+        score = score + 5;
+
+    } else if (
+        buttonC.value === "false") {
+        alert("Wrong!");
+        timeLeft = timeLeft - 2;
+    }
+}
+
+function checkAnswerD(event) {
+    if (
+        buttonD.value === "true") {
+        alert("Right!");
+        score = score + 5;
+
+    } else if (
+        buttonD.value === "false") {
+        alert("Wrong!");
+        timeLeft = timeLeft - 2;
+    }
+}
 //display score
 
 //prompt user for initals
@@ -143,11 +186,13 @@ function createQuestion() {
 
 //eventlistener for start button
 startButton.addEventListener("click", runTimer);
-startButton.addEventListener("click", createQuestion);
+startButton.addEventListener("click", startQuiz);
 
-buttonA.addEventListener("click", createQuestion);
-buttonB.addEventListener("click", createQuestion);
-buttonC.addEventListener("click", createQuestion);
-buttonD.addEventListener("click", createQuestion);
+
+//checkout the console logs for this mess
+buttonA.addEventListener("click", checkAnswerA);
+buttonB.addEventListener("click", checkAnswerB)
+buttonC.addEventListener("click", checkAnswerC)
+buttonD.addEventListener("click", checkAnswerD)
 
 //event listeners for answer buttons
