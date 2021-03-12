@@ -9,26 +9,26 @@
 </head>
 <body>
     <div class="quiz-box">
-        <div class="highscores">View Highscores</div>
+        <div class="highscores" id="highscores">View Highscores</div>
         <div class="timer" id="timer"></div>
 
         <header class="title">
             <h1>JavaScript Quiz</h1>
         </header>
         <div class="quiz-content" id="quiz-content">
-            <div class="view-score" id="view-score">
-            </div>
             <div class="quiz-questions" id="quiz-questions">
             </div>
+            <div class="view-score" id="view-score">
+            </div>
             <div class="quiz-answers" id="quiz-answers">
-                <button class="hide" id= "buttonA"></button>
-                <button class="hide" id= "buttonB"></button>
-                <button class="hide" id ="buttonC"></button>
-                <button class="hide" id ="buttonD"></button>
+                <button class="btn hide" id= "buttonA"></button>
+                <button class="btn hide" id= "buttonB"></button>
+                <button class="btn hide" id ="buttonC"></button>
+                <button class="btn hide" id ="buttonD"></button>
+                <div class="question-feedback" id="question-feedback">
+                </div>
             </div>
             <button class= "start-btn" id="start-button"></button>
-        </div>
-        <div class="question-feedback" id="question-feedback">
         </div>
     </div>
 </body>

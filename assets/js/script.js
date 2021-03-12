@@ -9,22 +9,31 @@
 //type initials and score is saved
 
 var displayQuestion = document.querySelector("#quiz-questions");
-//create button to start the quiz
+var feedBack = document.querySelector("#question-feedback");
+
+var userInput = document.createElement("input");
+userInput.setAttribute("type", "text");
+userInput.setAttribute("placeholder", "Enter initals");
+userInput.setAttribute("name", userInput);
+
+var submitBtn = document.createElement("input")
+submitBtn.addClass= "hide";
+submitBtn.setAttribute("type","submit")
+submitBtn.setAttribute("value","Submit")
+
 var startButton = document.createElement("button");
 startButton = document.querySelector("#start-button");
 startButton.className = "start-btn";
 startButton.textContent = "Click to start";
 
-//multiple choice buttons
 
 var answers = [];
 var score = 15;
 
-var timeLeft = 10
+var timeLeft = 5;
 timer.textContent = "Time Left:" + timeLeft;
 
 var currentQuestion = 0;
-//array of questions
 var questionsArray = [{
         number: 1,
         question: "Which method would you use before saving an array to localStorage?",
@@ -90,25 +99,19 @@ var questionsArray = [{
     },
 ];
 
-//timer created, when start button is clicked, countdown begins
 function runTimer() {
     var timer = document.querySelector("#timer")
     timeLeft--;
     if (timeLeft > 0) {
         setTimeout(runTimer, 1000)
-    } else if (timeLeft === 0) {
-        alert("You ran out of time!");
-        //endquiz();
+    } else if (timeLeft <= 0) {
+        timeLeft = 0;
+        saveScore();
     }
     timer.textContent = "Time Left:" + timeLeft;
     console.log(timeLeft);
 }
 
-function startQuiz() {
-    createQuestion();
-}
-
-//when start button is clicked , create questions
 function createQuestion() {
     if (currentQuestion < questionsArray.length) {
         startButton.remove();
@@ -118,7 +121,6 @@ function createQuestion() {
         buttonD = document.querySelector("#buttonD").removeAttribute("hide");
 
         answers = [];
-        //displayQuestion = document.querySelector("#quiz-questions");
         displayQuestion.textContent = questionsArray[currentQuestion].number + ". " + questionsArray[currentQuestion].question
         answers.push(questionsArray[currentQuestion].answers);
 
@@ -143,27 +145,41 @@ function createQuestion() {
         buttonD.value = answers[0][3].correct;
         currentQuestion++
     } else if (currentQuestion >= questionsArray.length) {
-        alert("quiz is over! Your score is");
-        displayScore();
+        saveScore();
     }
-
 };
 
-function displayScore() {
+function saveScore() {
+    feedBack.remove();
     displayQuestion.remove();
     buttonA.remove();
     buttonB.remove();
     buttonC.remove();
     buttonD.remove();
+    submitBtn.removeAttribute("hide")
 
-    var name = prompt("Enter your intials to save your score!")
+    var initalsForm = document.createElement("form")
+    userInput = document.createElement("input");
+    userInput.setAttribute("type", "text");
+    userInput.setAttribute("placeholder", "Enter initals");
+    userInput.setAttribute("name", "name");
+    
+    initalsForm.appendChild(userInput);
+    initalsForm.appendChild(submitBtn);
 
-    var viewScore = document.querySelector("#view-score")
-    viewScore.textContent = name + "   " + score;
-    localStorage.setItem("name", name);
-    localStorage.setItem("score", score);
+    document.getElementsByTagName("body")[0].appendChild(initalsForm);
 }
 
+function displayScore() {
+    userInput.remove();
+    submitBtn.remove();
+    var viewScore = document.querySelector("#view-score")
+    viewScore.textContent = "Score: " + userInput.value + "   " + score;
+    localStorage.setItem("name", userInput.value);
+    localStorage.setItem("score", score);
+    event.preventDefault();
+    
+}
 
 function checkAnswerA(event) {
     if (
@@ -175,7 +191,8 @@ function checkAnswerA(event) {
 
     } else if (
         buttonA.value === "false") {
-        alert("Wrong!");
+        var feedBack = document.querySelector("#question-feedback")
+        feedBack.textContent = "Incorrect!";
         timeLeft = timeLeft - 2;
         createQuestion();
     }
@@ -191,7 +208,8 @@ function checkAnswerB(event) {
 
     } else if (
         buttonB.value === "false") {
-        alert("Wrong!");
+        var feedBack = document.querySelector("#question-feedback")
+        feedBack.textContent = "Incorrect!";
         timeLeft = timeLeft - 2;
         createQuestion();
     }
@@ -207,7 +225,8 @@ function checkAnswerC(event) {
 
     } else if (
         buttonC.value === "false") {
-        alert("Wrong!");
+        var feedBack = document.querySelector("#question-feedback")
+        feedBack.textContent = "Incorrect!";
         timeLeft = timeLeft - 2;
         createQuestion();
     }
@@ -223,29 +242,19 @@ function checkAnswerD(event) {
 
     } else if (
         buttonD.value === "false") {
-        alert("Wrong!");
+        var feedBack = document.querySelector("#question-feedback")
+        feedBack.textContent = "Incorrect!";
         timeLeft = timeLeft - 2;
         createQuestion();
     }
 }
-//display score
-
-//prompt user for initals
-
-//save initals and score to localStorage
-
-//on submit, show highscores
 
 
-//eventlistener for start button
 startButton.addEventListener("click", runTimer);
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", createQuestion);
+submitBtn.addEventListener("click", displayScore);
 
-
-//checkout the console logs for this mess
 buttonA.addEventListener("click", checkAnswerA);
 buttonB.addEventListener("click", checkAnswerB);
 buttonC.addEventListener("click", checkAnswerC);
 buttonD.addEventListener("click", checkAnswerD);
-
-//event listeners for answer buttons
