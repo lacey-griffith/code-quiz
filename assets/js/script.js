@@ -33,9 +33,9 @@ startButton.textContent = "Click to start";
 var playAgain = document.querySelector("#play-again")
 
 var answers = [];
-var score = 15;
+var score = 0;
 
-var timeLeft = 50;
+var timeLeft = 45;
 timer.textContent = "Time Left:" + timeLeft;
 
 var currentQuestion = 0;
@@ -198,14 +198,14 @@ function checkAnswerA(event) {
         buttonA.value === "true") {
         var feedBack = document.querySelector("#question-feedback")
         feedBack.textContent = "Correct!";
-        score = score + 5;
+        score = score + 30;
         createQuestion();
 
     } else if (
         buttonA.value === "false") {
         var feedBack = document.querySelector("#question-feedback")
         feedBack.textContent = "Incorrect!";
-        timeLeft = timeLeft - 2;
+        timeLeft = timeLeft - 8;
         createQuestion();
     }
 }
