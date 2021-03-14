@@ -8,6 +8,9 @@
 //when over, score is shown
 //type initials and score is saved
 
+var viewScore = document.querySelector("#highscores");
+var savedScores = document.createElement("p");
+
 var displayQuestion = document.querySelector("#quiz-questions");
 var feedBack = document.querySelector("#question-feedback");
 
@@ -17,9 +20,10 @@ userInput.setAttribute("placeholder", "Enter initals");
 userInput.setAttribute("name", userInput);
 
 var submitBtn = document.createElement("input")
-submitBtn.addClass= "hide";
-submitBtn.setAttribute("type","submit")
-submitBtn.setAttribute("value","Submit")
+submitBtn.className = "submit-btn";
+submitBtn.addClass = "hide";
+submitBtn.setAttribute("type", "submit")
+submitBtn.setAttribute("value", "Submit")
 
 var startButton = document.createElement("button");
 startButton = document.querySelector("#start-button");
@@ -30,7 +34,7 @@ startButton.textContent = "Click to start";
 var answers = [];
 var score = 15;
 
-var timeLeft = 5;
+var timeLeft = 50;
 timer.textContent = "Time Left:" + timeLeft;
 
 var currentQuestion = 0;
@@ -158,12 +162,14 @@ function saveScore() {
     buttonD.remove();
     submitBtn.removeAttribute("hide")
 
+ 
     var initalsForm = document.createElement("form")
     userInput = document.createElement("input");
+    userInput.className = "initials-form";
     userInput.setAttribute("type", "text");
     userInput.setAttribute("placeholder", "Enter initals");
     userInput.setAttribute("name", "name");
-    
+
     initalsForm.appendChild(userInput);
     initalsForm.appendChild(submitBtn);
 
@@ -174,11 +180,16 @@ function displayScore() {
     userInput.remove();
     submitBtn.remove();
     var viewScore = document.querySelector("#view-score")
-    viewScore.textContent = "Score: " + userInput.value + "   " + score;
+    viewScore.textContent = "Score:";
     localStorage.setItem("name", userInput.value);
     localStorage.setItem("score", score);
+    document.getElementsByTagName("body")[0].appendChild(viewScore);
+
+    savedScores = document.createElement("p");
+    savedScores.textContent = localStorage.getItem("name") + "  " + localStorage.getItem("score")
+    document.querySelector("#view-score").appendChild(savedScores);
     event.preventDefault();
-    
+
 }
 
 function checkAnswerA(event) {
@@ -253,6 +264,7 @@ function checkAnswerD(event) {
 startButton.addEventListener("click", runTimer);
 startButton.addEventListener("click", createQuestion);
 submitBtn.addEventListener("click", displayScore);
+viewScore.addEventListener("click", displayScore);
 
 buttonA.addEventListener("click", checkAnswerA);
 buttonB.addEventListener("click", checkAnswerB);
