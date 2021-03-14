@@ -30,6 +30,7 @@ startButton = document.querySelector("#start-button");
 startButton.className = "start-btn";
 startButton.textContent = "Click to start";
 
+var playAgain = document.querySelector("#play-again")
 
 var answers = [];
 var score = 15;
@@ -260,11 +261,16 @@ function checkAnswerD(event) {
     }
 }
 
+function reStart () {
+    location.reload();
+}
+
 
 startButton.addEventListener("click", runTimer);
 startButton.addEventListener("click", createQuestion);
 submitBtn.addEventListener("click", displayScore);
 viewScore.addEventListener("click", displayScore);
+playAgain.addEventListener("click", reStart);
 
 buttonA.addEventListener("click", checkAnswerA);
 buttonB.addEventListener("click", checkAnswerB);
